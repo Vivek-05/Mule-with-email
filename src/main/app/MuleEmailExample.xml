@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:google-calendars="http://www.mulesoft.org/schema/mule/google-calendars" xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd
+http://www.mulesoft.org/schema/mule/google-calendars http://www.mulesoft.org/schema/mule/google-calendars/1.0/mule-google-calendars.xsd">
+    <spring:beans>
+        <spring:bean id="Bean" name="Bean" class="com.mule.lesson.InvokeClassJava"/>
+    </spring:beans>
+    <flow name="MuleEmailExampleFlow1" doc:name="MuleEmailExampleFlow1">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" path="invoke" doc:name="HTTP"/>
+        <logger message="Inside the class..." level="INFO" doc:name="Logger"/>
+        <component class="com.mule.lesson.InvokeClassJava" doc:name="Java">
+            <spring-object bean="Bean"/>
+        </component>
+        <logger message="Outside the class..." level="INFO" doc:name="Logger"/>
+    </flow>
+    
+    
+    
+   
+</mule>
